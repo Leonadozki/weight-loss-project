@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media print {
+  .no-print,
+  header,
+  nav {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .shadow-lg,
+  [class*="shadow"] {
+    box-shadow: none !important;
+  }
+
+  .bg-white,
+  [class*="bg-white"] {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .text-gray-500,
+  .text-gray-600 {
+    color: #4b5563 !important;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+    font-weight: bold !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #e5e7eb !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .bg-gradient-to-r,
+  [class*="bg-gradient"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .text-5xl {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  [class*="bg-yellow-50"],
+  [class*="bg-red-50"],
+  [class*="bg-blue-50"],
+  [class*="bg-green-50"] {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    padding: 1rem !important;
+  }
+
+  .bg-gray-50 {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .bg-white {
+    break-inside: avoid;
+  }
+
+  [class*="hover"]:hover {
+    background-color: inherit !important;
+  }
+}
