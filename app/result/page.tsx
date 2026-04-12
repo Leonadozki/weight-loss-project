@@ -88,30 +88,30 @@ export default function Result() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-10">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="text-center mb-6 md:mb-10">
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">评估报告</h1>
-          <p className="text-gray-600">基于您的身体数据生成的个性化减脂方案</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">评估报告</h1>
+          <p className="text-gray-600 text-sm md:text-base">基于您的身体数据生成的个性化减脂方案</p>
         </div>
 
         {/* BMI Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">身体质量指数 (BMI)</h2>
-          <div className="flex items-center justify-between">
-            <div className="text-center">
-              <div className={`text-5xl font-bold mb-2 ${
+        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8 mb-6 md:mb-8">
+          <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">身体质量指数 (BMI)</h2>
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="text-center mb-4 md:mb-0">
+              <div className={`text-4xl md:text-5xl font-bold mb-2 ${
                 result.bmi < 18.5 ? 'text-blue-500' :
                 result.bmi < 24 ? 'text-green-500' :
                 result.bmi < 28 ? 'text-orange-500' : 'text-red-500'
               }`}>{result.bmi.toFixed(1)}</div>
-              <div className="text-gray-600">{result.bmiCategory}</div>
+              <div className="text-gray-600 text-sm md:text-base">{result.bmiCategory}</div>
             </div>
-            <div className="flex-1 mx-8">
+            <div className="flex-1 mx-0 md:mx-8 w-full md:w-auto">
               <div className="relative h-4 bg-gray-200 rounded-full overflow-hidden">
                 <div
                   className="absolute h-full"
@@ -138,76 +138,76 @@ export default function Result() {
         </div>
 
         {/* Goals */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-blue-500 mb-2">{result.weightToLose.toFixed(1)} kg</div>
-            <div className="text-gray-600">目标减重量</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-blue-500 mb-2">{result.weightToLose.toFixed(1)} kg</div>
+            <div className="text-gray-600 text-sm md:text-base">目标减重量</div>
           </div>
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-orange-500 mb-2">{result.estimatedWeeks} 周</div>
-            <div className="text-gray-600">预计达成时间</div>
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">{result.estimatedWeeks} 周</div>
+            <div className="text-gray-600 text-sm md:text-base">预计达成时间</div>
           </div>
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-green-500 mb-2">{result.dailyCalories}</div>
-            <div className="text-gray-600">建议日摄入 (kcal)</div>
+          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 text-center">
+            <div className="text-2xl md:text-3xl font-bold text-green-500 mb-2">{result.dailyCalories}</div>
+            <div className="text-gray-600 text-sm md:text-base">建议日摄入 (kcal)</div>
           </div>
         </div>
 
         {/* Recommendations */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">核心建议</h2>
+        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8 mb-6 md:mb-8">
+          <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">核心建议</h2>
           <ul className="space-y-3">
             {result.recommendations.map((rec, index) => (
               <li key={index} className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-green-600 text-sm font-bold">{index + 1}</span>
                 </div>
-                <span className="text-gray-700">{rec}</span>
+                <span className="text-gray-700 text-sm md:text-base">{rec}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* Diet Plan */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">饮食建议</h2>
+        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8 mb-6 md:mb-8">
+          <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">饮食建议</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 bg-yellow-50 rounded-xl">
-              <div className="font-medium text-yellow-800 mb-2">早餐</div>
-              <div className="text-gray-700">{result.dietPlan.breakfast}</div>
+            <div className="p-3 md:p-4 bg-yellow-50 rounded-xl">
+              <div className="font-medium text-yellow-800 mb-2 text-sm md:text-base">早餐</div>
+              <div className="text-gray-700 text-sm md:text-base">{result.dietPlan.breakfast}</div>
             </div>
-            <div className="p-4 bg-red-50 rounded-xl">
-              <div className="font-medium text-red-800 mb-2">午餐</div>
-              <div className="text-gray-700">{result.dietPlan.lunch}</div>
+            <div className="p-3 md:p-4 bg-red-50 rounded-xl">
+              <div className="font-medium text-red-800 mb-2 text-sm md:text-base">午餐</div>
+              <div className="text-gray-700 text-sm md:text-base">{result.dietPlan.lunch}</div>
             </div>
-            <div className="p-4 bg-blue-50 rounded-xl">
-              <div className="font-medium text-blue-800 mb-2">晚餐</div>
-              <div className="text-gray-700">{result.dietPlan.dinner}</div>
+            <div className="p-3 md:p-4 bg-blue-50 rounded-xl">
+              <div className="font-medium text-blue-800 mb-2 text-sm md:text-base">晚餐</div>
+              <div className="text-gray-700 text-sm md:text-base">{result.dietPlan.dinner}</div>
             </div>
-            <div className="p-4 bg-green-50 rounded-xl">
-              <div className="font-medium text-green-800 mb-2">加餐</div>
-              <div className="text-gray-700">{result.dietPlan.snacks}</div>
+            <div className="p-3 md:p-4 bg-green-50 rounded-xl">
+              <div className="font-medium text-green-800 mb-2 text-sm md:text-base">加餐</div>
+              <div className="text-gray-700 text-sm md:text-base">{result.dietPlan.snacks}</div>
             </div>
           </div>
         </div>
 
         {/* Exercise Plan */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">运动计划</h2>
-          <div className="space-y-4">
+        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8 mb-6 md:mb-8">
+          <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">运动计划</h2>
+          <div className="space-y-3 md:space-y-4">
             {result.exercisePlan.map((exercise, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <span className="text-green-600 font-bold">{index + 1}</span>
+              <div key={index} className="flex items-center justify-between p-3 md:p-4 bg-gray-50 rounded-xl">
+                <div className="flex items-center space-x-3 md:space-x-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-full flex items-center justify-center">
+                    <span className="text-green-600 font-bold text-sm md:text-base">{index + 1}</span>
                   </div>
                   <div>
-                    <div className="font-medium text-gray-900">{exercise.type}</div>
-                    <div className="text-sm text-gray-500">{exercise.frequency}</div>
+                    <div className="font-medium text-gray-900 text-sm md:text-base">{exercise.type}</div>
+                    <div className="text-xs md:text-sm text-gray-500">{exercise.frequency}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-medium text-green-600">{exercise.duration}</div>
+                  <div className="font-medium text-green-600 text-sm md:text-base">{exercise.duration}</div>
                 </div>
               </div>
             ))}
@@ -215,7 +215,7 @@ export default function Result() {
         </div>
 
         {/* Actions */}
-        <div className="flex justify-center space-x-4 no-print">
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 no-print">
           <button 
             onClick={() => window.print()}
             className="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-200 transition-colors"

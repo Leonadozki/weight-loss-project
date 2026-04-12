@@ -28,22 +28,22 @@ export default function Home() {
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
-          <h1 className="text-5xl font-extrabold text-gray-900 mb-6">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 md:mb-6">
             科学减脂，<span className="text-green-500">重塑自我</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto px-4 md:px-0">
             通过专业的身体评估和个性化建议，帮助您制定科学的减脂计划，实现健康减重目标。
           </p>
-          <div className="flex justify-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 px-4 md:px-0">
             <Link
               href="/assessment"
-              className="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl"
+              className="bg-green-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl"
             >
               开始评估
             </Link>
             <Link
               href="/dashboard"
-              className="bg-white text-green-500 border-2 border-green-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-50 transition-colors"
+              className="bg-white text-green-500 border-2 border-green-500 px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold hover:bg-green-50 transition-colors"
             >
               查看进度
             </Link>
@@ -84,32 +84,32 @@ export default function Home() {
         </div>
 
         {/* Stats */}
-        <div className="mt-24 bg-green-500 rounded-3xl p-12 text-white">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div className="mt-12 md:mt-24 bg-green-500 rounded-2xl md:rounded-3xl p-6 md:p-12 text-white">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold mb-2">10,000+</div>
-              <div className="text-green-100">用户信任</div>
+              <div className="text-2xl md:text-4xl font-bold mb-1 md:mb-2">10,000+</div>
+              <div className="text-green-100 text-sm md:text-base">用户信任</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">85%</div>
-              <div className="text-green-100">成功率</div>
+              <div className="text-2xl md:text-4xl font-bold mb-1 md:mb-2">85%</div>
+              <div className="text-green-100 text-sm md:text-base">成功率</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">50,000+</div>
-              <div className="text-green-100">评估完成</div>
+              <div className="text-2xl md:text-4xl font-bold mb-1 md:mb-2">50,000+</div>
+              <div className="text-green-100 text-sm md:text-base">评估完成</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">4.9</div>
-              <div className="text-green-100">用户评分</div>
+              <div className="text-2xl md:text-4xl font-bold mb-1 md:mb-2">4.9</div>
+              <div className="text-green-100 text-sm md:text-base">用户评分</div>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ export default function Home() {
               </div>
               <span className="text-xl font-bold">健康减脂</span>
             </div>
-            <p className="text-gray-400">© 2026 健康减脂评估系统. 保留所有权利.</p>
+            <p className="text-gray-400 text-sm md:text-base text-center md:text-right">© 2026 健康减脂评估系统. 保留所有权利.</p>
           </div>
         </div>
       </footer>

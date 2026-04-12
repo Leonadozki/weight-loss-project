@@ -134,10 +134,13 @@ export default function Assessment() {
       </header>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold text-gray-900">身体评估</h1>
+        <div className="mb-6 md:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-0">身体评估</h1>
             <span className="text-sm text-gray-500">
+              步骤 {currentStep} / {totalSteps}
+            </span>
+          </div>
               步骤 {currentStep} / {totalSteps}
             </span>
           </div>
@@ -149,10 +152,12 @@ export default function Assessment() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8">
           {currentStep === 1 && (
-            <div className="space-y-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+            <div className="space-y-4 md:space-y-6">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">
+                基本信息
+              </h2>
                 基本信息
               </h2>
 
@@ -358,7 +363,7 @@ export default function Assessment() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   日均睡眠时长
                 </label>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
                   {["<6", "6-7", "7-8", ">8"].map((hours) => (
                     <button
                       key={hours}
