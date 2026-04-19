@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useAuth } from "./context/AuthContext";
 
 export default function Home() {
+  const { user, logout } = useAuth();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
       {/* Header */}
@@ -14,13 +19,32 @@ export default function Home() {
             </div>
             <span className="text-2xl font-bold text-gray-900">健康减脂</span>
           </div>
-          <nav className="flex space-x-4">
-            <Link href="/auth/login" className="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">
-              登录
-            </Link>
-            <Link href="/auth/register" className="bg-green-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-colors">
-              注册
-            </Link>
+          <nav className="flex items-center space-x-4">
+            {user ? (
+              <>
+                <Link href="/dashboard" className="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">
+                  个人中心
+                </Link>
+                <Link href="/coach" className="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">
+                  AI 陪跑
+                </Link>
+                <button
+                  onClick={logout}
+                  className="text-gray-600 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  退出
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/auth/login" className="text-gray-600 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium">
+                  登录
+                </Link>
+                <Link href="/auth/register" className="bg-green-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition-colors">
+                  注册
+                </Link>
+              </>
+            )}
           </nav>
         </div>
       </header>
