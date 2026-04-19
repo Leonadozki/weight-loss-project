@@ -141,9 +141,6 @@ export default function Assessment() {
               步骤 {currentStep} / {totalSteps}
             </span>
           </div>
-              步骤 {currentStep} / {totalSteps}
-            </span>
-          </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-green-500 h-2 rounded-full transition-all duration-300"
@@ -156,8 +153,6 @@ export default function Assessment() {
           {currentStep === 1 && (
             <div className="space-y-4 md:space-y-6">
               <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4 md:mb-6">
-                基本信息
-              </h2>
                 基本信息
               </h2>
 

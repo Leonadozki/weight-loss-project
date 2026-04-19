@@ -3,11 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-interface User {
-  name: string;
-  email: string;
-}
+import { useAuth } from "../context/AuthContext";
+import { getCheckInHistory, getTodayStr, checkMilestones } from "../lib/coach-rules";
 
 interface AssessmentHistory {
   date: string;
@@ -18,37 +15,52 @@ interface AssessmentHistory {
 
 export default function Dashboard() {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const { user, isLoading, logout } = useAuth();
   const [history, setHistory] = useState<AssessmentHistory[]>([]);
+  const [streak, setStreak] = useState(0);
+  const [todayChecked, setTodayChecked] = useState(false);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (!savedUser) {
+    if (!isLoading && !user) {
       router.push("/auth/login");
       return;
     }
-    setUser(JSON.parse(savedUser));
 
-    // Load mock history
+    // Load mock assessment history
     setHistory([
       { date: "2026-04-06", bmi: 24.5, weight: 70, targetWeight: 65 },
       { date: "2026-03-01", bmi: 25.2, weight: 72, targetWeight: 65 },
       { date: "2026-02-01", bmi: 26.0, weight: 74, targetWeight: 65 },
     ]);
-  }, [router]);
+
+    // Load coach data
+    const checkins = getCheckInHistory();
+    const dates = new Set(checkins.map((h) => h.date));
+    setTodayChecked(dates.has(getTodayStr()));
+
+    let s = 0;
+    let check = new Date(getTodayStr());
+    while (dates.has(check.toISOString().slice(0, 10))) {
+      s++;
+      check.setDate(check.getDate() - 1);
+    }
+    setStreak(s);
+  }, [user, isLoading, router]);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    logout();
     router.push("/");
   };
 
-  if (!user) {
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-500" />
       </div>
     );
   }
+
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
@@ -80,6 +92,28 @@ export default function Dashboard() {
           <p className="text-gray-600">查看您的减脂进度和历史记录</p>
         </div>
 
+        {/* AI Coach Banner */}
+        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl shadow-lg p-6 mb-8 text-white">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-bold mb-1">🤖 AI 减脂陪跑</h2>
+              <p className="text-green-100 text-sm">
+                {todayChecked
+                  ? `今日已打卡，已连续打卡 ${streak} 天！`
+                  : streak > 0
+                  ? `已连续打卡 ${streak} 天，今天别忘了打卡哦`
+                  : "开始每日打卡，AI 教练全程陪伴你的减脂之旅"}
+              </p>
+            </div>
+            <Link
+              href="/coach"
+              className="bg-white text-green-600 px-6 py-3 rounded-xl font-medium hover:bg-green-50 transition-colors whitespace-nowrap"
+            >
+              {todayChecked ? "查看陪跑" : "去打卡"}
+            </Link>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="text-sm text-gray-500 mb-1">当前BMI</div>
@@ -93,7 +127,7 @@ export default function Dashboard() {
           </div>
           <div className="bg-white rounded-2xl shadow-lg p-6">
             <div className="text-sm text-gray-500 mb-1">坚持天数</div>
-            <div className="text-3xl font-bold text-orange-500">65 天</div>
+            <div className="text-3xl font-bold text-orange-500">{streak} 天</div>
             <div className="text-sm text-gray-600 mt-1">继续加油！</div>
           </div>
         </div>
@@ -167,6 +201,12 @@ export default function Dashboard() {
                 className="block w-full text-center bg-blue-50 text-blue-700 py-3 rounded-xl hover:bg-blue-100 transition-colors"
               >
                 查看最新报告
+              </Link>
+              <Link
+                href="/coach/progress"
+                className="block w-full text-center bg-purple-50 text-purple-700 py-3 rounded-xl hover:bg-purple-100 transition-colors"
+              >
+                查看陪跑进度
               </Link>
             </div>
           </div>
