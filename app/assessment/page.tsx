@@ -76,10 +76,11 @@ export default function Assessment() {
       if (response.ok) {
         const result = await response.json();
         localStorage.setItem("assessmentResult", JSON.stringify(result));
+        localStorage.removeItem("wla_payment_status");
         // Simulate professional analysis delay
         await new Promise((resolve) => setTimeout(resolve, 2000));
         setIsGenerating(false);
-        router.push("/result");
+        router.push("/payment");
       }
     } catch (error) {
       setIsGenerating(false);

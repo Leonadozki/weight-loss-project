@@ -32,11 +32,21 @@ export default function Result() {
 
   useEffect(() => {
     const savedResult = localStorage.getItem("assessmentResult");
-    if (savedResult) {
-      setResult(JSON.parse(savedResult));
+    const paymentStatus = localStorage.getItem("wla_payment_status");
+
+    if (!savedResult) {
+      setLoading(false);
+      return;
     }
+
+    if (paymentStatus !== "paid") {
+      router.push("/payment");
+      return;
+    }
+
+    setResult(JSON.parse(savedResult));
     setLoading(false);
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (
